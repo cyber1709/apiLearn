@@ -1,8 +1,12 @@
-from django.urls import path
-from myapi.views import IOCListCreate, IOCDetail, HelloApiView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from myapi.views import UserProfileViewSet 
 
-urlpatterns = [
-    path('iocs/', IOCListCreate.as_view(), name='ioc-list'),
-    path('iocs/<int:pk>/', IOCDetail.as_view(), name='ioc-detail'),
-    path('hello-view', HelloApiView.as_view() )
+router = DefaultRouter()
+router.register('profile',  UserProfileViewSet)
+
+
+
+urlpatterns = [ 
+    path('', include(router.urls))
 ]
